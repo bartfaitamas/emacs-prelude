@@ -1,0 +1,3 @@
+[submodule "vendor/minimal-yasnippet-php-mode"]
+	path = vendor/minimal-yasnippet-php-mode
+	url = git@github.com:bartfaitamas/minimal-yasnippet-php-mode.git
