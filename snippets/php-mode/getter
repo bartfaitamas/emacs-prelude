@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Property getter
+# key: getter
+# --
+/**
+ * Get ${1:property}
+ *
+ * @return ${2:type}
+ */
+public function get${1:$(upcase-initials text)}()
+{
+    return $this->$1;
+}

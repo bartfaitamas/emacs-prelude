@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Property accessor
+# key: accessor
+# --
+
+/**
+ * @var ${2:type} $${1:property}
+ */
+private $$1;
+
+/**
+ * Get $1
+ *
+ * @return $2
+ */
+public function get${1:$(upcase-initials text)}()
+{
+    return $this->$1;
+}
+
+/**
+ * Set $1
+ *
+ * @param $2 $$1
+ */
+public function set${1:$(upcase-initials text)}($2 $0$$1)
+{
+    $this->$1 = $$1;
+}
