@@ -10,3 +10,6 @@ semanticdb
 custom.el
 url
 ede-projects.el
+geben
+session.*
+tramp
