@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+<?php
+
+namespace ${2:`(mapconcat 'identity (nthcdr 1 (member "src" (butlast (split-string (buffer-file-name) "/")))) "\\\\")`};
+
+/**
+ * $3
+ * 
+ * @author Bártfai Tamás <bartfaitamas@gmail.com>
+ */
+class ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} $4
+{
+$0
+}

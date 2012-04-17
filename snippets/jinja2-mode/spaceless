@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: spaceless
+# key: space
+# binding: direct-keybinding
+# --
+{% spaceless %}
+$0
+{% endspaceless %}

@@ -1,23 +1,22 @@
-(add-to-list 'auto-mode-alist '("\\.json$" . js3-mode))
-(add-to-list 'auto-mode-alist '("\\.json.twig$" . js3-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.json.twig$" . js-mode))
 
-(defadvice js2-reparse (before json)
-        (setq js2-buffer-file-name buffer-file-name))
-(ad-activate 'js2-reparse)
+(defun my-flymake-show-help ()
+   (when (get-char-property (point) 'flymake-overlay)
+     (let ((help (get-char-property (point) 'help-echo)))
+       (if help (message "%s" help)))))
 
-(defadvice js2-parse-statement (around json)
-        (if (and (= tt js2-LC)
-                        js2-buffer-file-name
-                        (or
-                         (string-equal (substring js2-buffer-file-name -5) ".json")
-                         (string-equal (substring js2-buffer-file-name -10) ".json.twig"))
-                        (eq (+ (save-excursion
-                                                (goto-char (point-min))
-                                                (back-to-indentation)
-                                                (while (eolp)
-                                                        (next-line)
-                                                        (back-to-indentation))
-                                                (point)) 1) js2-ts-cursor))
-                (setq ad-return-value (js2-parse-assign-expr))
-                ad-do-it))
-(ad-activate 'js2-parse-statement)
+(add-hook 'post-command-hook 'my-flymake-show-help)
+
+
+(setq inferior-js-program-command "node")
+
+(setq inferior-js-mode-hook
+      (lambda ()
+        ;; We like nice colors
+        (ansi-color-for-comint-mode-on)
+        ;; Deal with some prompt nonsense
+        (add-to-list 'comint-preoutput-filter-functions
+                     (lambda (output)
+                       (replace-regexp-in-string ".*1G\.\.\..*5G" "..."
+                                                 (replace-regexp-in-string ".*1G.*3G" " > " output))))))
